@@ -29,7 +29,7 @@ include "database/consultas.php";
 
     </ul>
 
-    <h1 class="display-1">Produtos</h1>
+    <h1 class="display-2">Produtos</h1>
     <hr>
     <div class="card-columns">
         <?php $produtos = $listarTodos();
@@ -37,15 +37,17 @@ include "database/consultas.php";
         ?>
     </div>
 <div class="card">
-    <img src="<?php echo $produto['foto'] ?>" alt=" <?php echo $produto['produto']?>" class="card-img-top">
+    <img src="<?php echo $produto['foto']?>" alt="<?php echo $produto['produto']?>" class="card-img-top">
 </div>
     <div class="card-body">
         <h4 class="card-title text-center"><?php echo $produto['produto']?></h4>
         <h5 class="card-text text-danger text-center"> R$ <?php echo number_format($produto['preco'],2,",",".")?></h5>
 
-        <a href="" class="btn btn-success btn-block">
-            <i class="fa fa-shopping-cart">adicionar ao carrinho</i>
+      <a href="gerenciar_carrinho.php?acao=adicionar&id=<?php echo $produto['id']?>" class="btn btn-success btn-block">
+            <i class="fa fa-shopping-cart">Adicionar no Carrinho</i>
+
         </a>
+
     </div>
 <?php endforeach;?>
 </div>

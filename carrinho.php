@@ -1,3 +1,6 @@
+<?php include "carrinho/funcoes.php" ?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -30,7 +33,73 @@
     </ul>
 
 <h1 class="display-1">Carrinho</h1>
-    <hr><br>
+ <table class="table table-hover table-striped">
+<thead>
+<tr>
+    <th>Foto</th>
+    <th>Produto</th>
+    <th>Valor</th>
+    <th>Descricão</th>
+
+</tr>
+
+</thead>
+<tbody>
+<?php
+$carrinho = getCarrinho();
+    if(is_null($carrinho)||count($carrinho) == 0):?>
+<tr>
+  <td colspan="4" class="bg-info">
+      nenhum produto no carrinho
+  </td>
+
+</tr>
+<?php else:
+    foreach ($carrinho as $item):
+?>
+<tr>
+    <td><img src="<?php echo $item['foto']?>" alt="" width="40" ></td>
+    <td><h5><?php echo $item['produto']?></h5>
+       <small><?php echo($item)['descricao']?> </small>
+    </td>
+    <td>R$<?php echo number_format($item['preco'],2,",",".")?></td>
+
+    <td>
+        <a href="gerenciar_carrinho.php?acao=excluir&id=<?php echo $item['id']?>"class="btn btn-danger">excluir<i class="fa fa-trash"></i></a>
+    </td>
+</tr>
+<?php
+    endforeach;
+endif;
+?>
+     <?php if(count($carrinho) > 0): ?>
+            <tfoot>
+                 <tr>
+                     <td colspan="2" class="text-right">
+                         Total
+                     </td>
+                     <td>
+                         R$<?php $total = calculaTotal();echo number_format($total,2,",",".")?>
+                     </td>
+                 </tr>
+                 <tr>
+                     <td colspan="2" class="text-right">
+                        Desconto
+                     </td>
+                        <td colspan="2">
+                         <form action="gerenciar_carrinho.php">
+                             <input type="hidden" value="aplicar_desconto" name="acao">
+                             <input type="text" name="desconto" class="form-control" style="width: 100px;">
+                         </form>
+                     </td>
+                 </tr>
+
+             </tfoot>
+    <?php endif;?>
+
+     </tbody>
+
+ </table>
 
 
 </div>

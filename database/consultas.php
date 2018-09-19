@@ -7,8 +7,8 @@ declare(strict_types=1);
   $sql = "select * from produtos";
         $result = mysqli_query($conn,$sql);
 
-        $retorno=[];
-        while ($row=mysqli_fetch_assoc($result)){
+        $retorno =[];
+            while ($row=mysqli_fetch_assoc($result)){
             $retorno[]= $row;
         }
         return $retorno;
